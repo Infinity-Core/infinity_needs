@@ -17,6 +17,7 @@ Advanced needs, inventory, and metabolism module for RedM, developed by Shepard 
 ## 📦 Installation
 
 1. Place this folder in your server's `resources` directory.
+1.5. In the inventory folder, make sure to fully extract the .rar file — it contains the images inventory
 2. Add the resource to your `server.cfg`:
    ```
     ensure oxmysql              # Module SQL
