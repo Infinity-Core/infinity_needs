@@ -1,0 +1,162 @@
+<html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@100;200;300;400;500;600;700&amp;display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="inventory.css" type="text/css">
+        <link rel="stylesheet" href="./vendor/animations.css" />
+        <link href="./vendor/bootstrap.css" rel="stylesheet">
+        <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+    </head>
+<body>
+    <div id="inventory_ui">
+        
+        <div id="xpbar" class="animate__animated animate__fadeInUp animate__delay-1s"></div>
+      
+        <div class="d-flex w-100 h-100">
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <input type="number" class="form-control" id="quantityitems">
+                    <input type="hidden" class="form-control" id="name">
+                    <input type="hidden" class="form-control" id="quantitychecker">
+                    <input type="hidden" class="form-control" id="label">
+                    <input type="hidden" class="form-control" id="weightotal">
+                    <button class="drop mt-2" onclick="play()">DROP</button>
+                </div>
+            </div>
+
+            <div class="inventory_content container ms-auto position-relative me-5 width_inventory h-75 animate__animated animate__fadeIn" id="draggable_inventory">
+                <div class="inventory_header"><!-- Ajout d'une zone pour attraper l'inventaire --></div>
+                <div class="px-2 d-flex flex-column h-100">
+                    <div class="d-flex bar_top mb-2">
+                        <div class="title_satchel animate__animated animate__fadeInRight animate__delay-1s">Satchel</div>
+                        <div class="d-flex my-auto ms-auto">
+                            <div class="weight my-auto"></div>
+                            <span class="weight_text my-auto ms-2" id="weightbase"></span> 
+                            <span class="weight_text my-auto mx-2"> / </span>
+                            <span class="weight_text my-auto" id="sizemax"></span>
+                            <span class="weight_text my-auto">kg</span>
+                        </div> 
+                        <div class="d-flex my-auto mx-3">
+                            <div class="dollars my-auto"></div>
+                            <span class="weight_text my-auto ms-2" id="cashinv"></span>
+                        </div> 
+                        <div class="d-flex my-auto mx-3">
+                            <div class="golds my-auto"></div>
+                            <span class="weight_text my-auto ms-2" id="goldsinv"></span>
+                        </div> 
+                        <div class="d-flex my-auto">
+                            <div class="clipgun my-auto ms-2"></div>
+                        </div> 
+                        <div class="d-flex my-auto">
+                            <div class="inspectweapon my-auto ms-2"></div>
+                        </div> 
+                        <div class="d-flex my-auto">
+                            <div class="cleangun my-auto ms-2"></div>
+                        </div> 
+                        <div class="d-flex my-auto ms-4">
+                            <div class="map my-auto ms-2"></div>
+                        </div> 
+                    </div>
+                    <div class="row">
+                        <div class="d-flex">
+                            <div class="my-auto">
+                                <div class="item_name_top"></div>
+                                <div class="item_description"></div>
+                            </div>
+                            <div class="d-flex flex-column ms-auto my-auto">
+                                <div class="poids"></div>
+                                <div class="bonus"></div>
+                                <div class="bonus2"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <section class="filters animate__animated animate__fadeInDown animate__delay-1s">
+                        <div class="filter all" data-category="all" onclick="play()"></div>
+                        <div class="filter provisions" data-category="provisions" onclick="play()"></div>
+                        <div class="filter hp" data-category="hp" onclick="play()"></div>
+                        <div class="filter weapons" data-category="weapons" onclick="play()"></div>
+                        <div class="filter standard" data-category="standard" onclick="play()"></div>
+                    </section>
+
+                    <section class="scroll">
+                        <div class="row" id="content_user"></div>
+                        <div class="row" id="content_user2"></div>
+                        <div class="row" id="content_user3"></div>
+                        <div class="row" id="content_user4"></div>
+                        <div class="row" id="content_user5"></div>
+                    </section>
+
+                    <div class="row mt-auto icons_sets pt-4" onclick="play()">
+                        <div class="d-flex">
+                            <span class="ms-auto me-2 mb-2 closeText d-flex animate__animated animate__fadeInRight animate__delay-1s">
+                                <img class="closeIcon my-auto" src="./design/cancel.png">
+                                <span class="my-auto ms-1">Close</span>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+                <div id="blur"></div>
+            </div>
+       </div>
+    </div>
+    <script src="./inventory.js" type="text/javascript"></script>
+    <script> 
+        let modal = document.getElementById("myModal");
+        
+        // Code pour le drag and drop de l'inventaire
+        const draggableInventory = document.getElementById('draggable_inventory');
+        let isDragging = false;
+        let currentX;
+        let currentY;
+        let initialX;
+        let initialY;
+        let xOffset = 0;
+        let yOffset = 0;
+
+        draggableInventory.addEventListener('mousedown', dragStart);
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', dragEnd);
+
+        function dragStart(e) {
+            if (e.target.closest('.inventory_header')) {
+                initialX = e.clientX - xOffset;
+                initialY = e.clientY - yOffset;
+                isDragging = true;
+            }
+        }
+
+        function drag(e) {
+            if (isDragging) {
+                e.preventDefault();
+                currentX = e.clientX - initialX;
+                currentY = e.clientY - initialY;
+                xOffset = currentX;
+                yOffset = currentY;
+                setTranslate(currentX, currentY, draggableInventory);
+            }
+        }
+
+        function dragEnd(e) {
+            isDragging = false;
+        }
+
+        function setTranslate(xPos, yPos, el) {
+            el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        function play() {
+            let audio = document.getElementById("audio");
+            audio.play();
+        }
+    </script>
+    <audio id="audio" src="./design/click.wav"></audio>
+</body>
+</html>
