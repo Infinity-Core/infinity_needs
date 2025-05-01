@@ -47,7 +47,8 @@ exports {
 	'RemoveInventoryItem',
 	'Temp_Metabolism',
 	'JSON_CHECKER',
-	'JsonItemsList'
+	'JsonItemsList',
+	'OpenInventory'
 }
 
 server_exports {

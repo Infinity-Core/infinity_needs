@@ -121,11 +121,13 @@ RegisterCommand('inv', function()
     TriggerServerEvent('infinity_needs:OpenInventory', _InfinitySource, SPlayerDatas._Inventory)
 end, false)
 
+
 RegisterNetEvent('infinity_needs:returnJson')
 AddEventHandler('infinity_needs:returnJson', function(ItemsPlayer)
     local PlayerDatas = exports.infinity_core:GetPlayerSession(source)
     DisplayActions(not displayInventory, ItemsPlayer, PlayerDatas._Cash, PlayerDatas._Gold, PlayerDatas._Xp)
 end)
+
 
 function DisplayActions(bool, ItemsPlayer, cash, golds, xp)
     displayInventory    = bool
@@ -361,4 +363,17 @@ end
 -- exports.infinity_needs:RemoveInventoryItem(source, itemUse, quantity, Inventory)
 function RemoveInventoryItem(source, itemUse, quantity, Inventory, notif)
     TriggerServerEvent('infinity_needs:RemoveItemFunc', source, itemUse, quantity, Inventory, notif)
+end
+
+-- exports.infinity_needs:OpenInventory(true, source) or exports.infinity_needs:OpenInventory(false, source)
+function OpenInventory(boolen, source)
+    if boolen == true and source ~= nil then
+        local _InfinitySource = source
+        local SPlayerDatas           = exports.infinity_core:GetPlayerSession(source)
+        TriggerServerEvent('infinity_needs:OpenInventory', _InfinitySource, SPlayerDatas._Inventory)
+    elseif boolen == false then
+        DisplayActions(false)
+    else
+        print("^1[INFINITY NEEDS] ^7Invalid arguments 'source or boolen' ^7")
+    end
 end

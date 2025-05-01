@@ -48,20 +48,22 @@ $(function () {
                         if(itemsPlayer[itemSingle].amount >= 1){
                             i++;
                             weightbase += parseFloat(itemsPlayer[itemSingle].total);
+                            // console.log("ITEM DATA:", itemSingle, itemsPlayer[itemSingle]);
                             $("#content_user").append(`
                                 <div class="col-lg-3 my-2">
-                                    <div class="case_item item_`+itemsPlayer[itemSingle].rare+`"
-                                        data-cat="`+itemsPlayer[itemSingle].type_item+`"
-                                        data-droped="`+itemsPlayer[itemSingle].droped+`" 
-                                        data-bonus="`+itemsPlayer[itemSingle].bonus+`" 
-                                        data-bonus2="`+itemsPlayer[itemSingle].bonus2+`"
-                                        data-quantity="`+itemsPlayer[itemSingle].amount+`" 
-                                        data-poids="`+itemsPlayer[itemSingle].total+`" 
-                                        data-name="`+itemsPlayer[itemSingle].name+`" 
-                                        data-label="`+itemsPlayer[itemSingle].label+`" 
-                                        data-desc="`+itemsPlayer[itemSingle].description+`" 
-                                        style="background-image: url('`+itemsPlayer[itemSingle].img+`');">
-                                        <span class="stock_item">`+itemsPlayer[itemSingle].amount+`</span>
+                                    <div class="case_item item_${itemsPlayer[itemSingle].rare}"
+                                        data-cat="${itemsPlayer[itemSingle].type_item}"
+                                        data-droped="${itemsPlayer[itemSingle].droped}" 
+                                        data-bonus="${itemsPlayer[itemSingle].bonus}"
+                                        data-bonus2="${itemsPlayer[itemSingle].bonus2}"
+                                        data-name="${itemsPlayer[itemSingle].name}"
+                                        data-label="${itemsPlayer[itemSingle].label}"
+                                        data-desc="${itemsPlayer[itemSingle].description}"
+                                        data-poids="${itemsPlayer[itemSingle].total}"
+                                        data-quantity="${itemsPlayer[itemSingle].amount}"
+                                        data-meta='${JSON.stringify(itemsPlayer[itemSingle].meta || {})}'
+                                        style="background-image: url('${itemsPlayer[itemSingle].img}');">
+                                        <span class="stock_item">${itemsPlayer[itemSingle].amount}</span>
                                     </div>
                                 </div>
                             `);
@@ -79,18 +81,19 @@ $(function () {
                             weightbase += parseFloat(itemsPlayer[itemSingle].total);
                             $("#content_user2").append(`
                                 <div class="col-lg-3 my-2">
-                                    <div class="case_item item_`+itemsPlayer[itemSingle].rare+`"
-                                        data-cat="`+itemsPlayer[itemSingle].type_item+`"
-                                        data-droped="`+itemsPlayer[itemSingle].droped+`" 
-                                        data-bonus="`+itemsPlayer[itemSingle].bonus+`" 
-                                        data-bonus2="`+itemsPlayer[itemSingle].bonus2+`"
-                                        data-quantity="`+itemsPlayer[itemSingle].amount+`" 
-                                        data-poids="`+itemsPlayer[itemSingle].total+`" 
-                                        data-name="`+itemsPlayer[itemSingle].name+`" 
-                                        data-label="`+itemsPlayer[itemSingle].label+`" 
-                                        data-desc="`+itemsPlayer[itemSingle].description+`" 
-                                        style="background-image: url('`+itemsPlayer[itemSingle].img+`');">
-                                        <span class="stock_item">`+itemsPlayer[itemSingle].amount+`</span>
+                                    <div class="case_item item_${itemsPlayer[itemSingle].rare}"
+                                        data-cat="${itemsPlayer[itemSingle].type_item}"
+                                        data-droped="${itemsPlayer[itemSingle].droped}" 
+                                        data-bonus="${itemsPlayer[itemSingle].bonus}"
+                                        data-bonus2="${itemsPlayer[itemSingle].bonus2}"
+                                        data-name="${itemsPlayer[itemSingle].name}"
+                                        data-label="${itemsPlayer[itemSingle].label}"
+                                        data-desc="${itemsPlayer[itemSingle].description}"
+                                        data-poids="${itemsPlayer[itemSingle].total}"
+                                        data-quantity="${itemsPlayer[itemSingle].amount}"
+                                        data-meta='${JSON.stringify(itemsPlayer[itemSingle].meta || {})}'
+                                        style="background-image: url('${itemsPlayer[itemSingle].img}');">
+                                        <span class="stock_item">${itemsPlayer[itemSingle].amount}</span>
                                     </div>
                                 </div>
                             `);
@@ -107,18 +110,19 @@ $(function () {
                             weightbase += parseFloat(itemsPlayer[itemSingle].total);
                             $("#content_user5").append(`
                                 <div class="col-lg-3 my-2">
-                                    <div class="case_item item_`+itemsPlayer[itemSingle].rare+`"
-                                        data-cat="`+itemsPlayer[itemSingle].type_item+`"
-                                        data-droped="`+itemsPlayer[itemSingle].droped+`" 
-                                        data-bonus="`+itemsPlayer[itemSingle].bonus+`" 
-                                        data-bonus2="`+itemsPlayer[itemSingle].bonus2+`"
-                                        data-quantity="`+itemsPlayer[itemSingle].amount+`" 
-                                        data-poids="`+itemsPlayer[itemSingle].total+`" 
-                                        data-name="`+itemsPlayer[itemSingle].name+`" 
-                                        data-label="`+itemsPlayer[itemSingle].label+`" 
-                                        data-desc="`+itemsPlayer[itemSingle].description+`" 
-                                        style="background-image: url('`+itemsPlayer[itemSingle].img+`');">
-                                        <span class="stock_item">`+itemsPlayer[itemSingle].amount+`</span>
+                                    <div class="case_item item_${itemsPlayer[itemSingle].rare}"
+                                        data-cat="${itemsPlayer[itemSingle].type_item}"
+                                        data-droped="${itemsPlayer[itemSingle].droped}" 
+                                        data-bonus="${itemsPlayer[itemSingle].bonus}"
+                                        data-bonus2="${itemsPlayer[itemSingle].bonus2}"
+                                        data-name="${itemsPlayer[itemSingle].name}"
+                                        data-label="${itemsPlayer[itemSingle].label}"
+                                        data-desc="${itemsPlayer[itemSingle].description}"
+                                        data-poids="${itemsPlayer[itemSingle].total}"
+                                        data-quantity="${itemsPlayer[itemSingle].amount}"
+                                        data-meta='${JSON.stringify(itemsPlayer[itemSingle].meta || {})}'
+                                        style="background-image: url('${itemsPlayer[itemSingle].img}');">
+                                        <span class="stock_item">${itemsPlayer[itemSingle].amount}</span>
                                     </div>
                                 </div>
                             `);
@@ -136,18 +140,19 @@ $(function () {
                             weightbase += parseFloat(itemsPlayer[itemSingle].total);
                             $("#content_user3").append(`
                                 <div class="col-lg-3 my-2">
-                                    <div class="case_item item_`+itemsPlayer[itemSingle].rare+`"
-                                        data-cat="`+itemsPlayer[itemSingle].type_item+`"
-                                        data-droped="`+itemsPlayer[itemSingle].droped+`" 
-                                        data-bonus="`+itemsPlayer[itemSingle].bonus+`" 
-                                        data-bonus2="`+itemsPlayer[itemSingle].bonus2+`"
-                                        data-quantity="`+itemsPlayer[itemSingle].amount+`" 
-                                        data-poids="`+itemsPlayer[itemSingle].total+`" 
-                                        data-name="`+itemsPlayer[itemSingle].name+`" 
-                                        data-label="`+itemsPlayer[itemSingle].label+`" 
-                                        data-desc="`+itemsPlayer[itemSingle].description+`" 
-                                        style="background-image: url('`+itemsPlayer[itemSingle].img+`');">
-                                        <span class="stock_item">`+itemsPlayer[itemSingle].amount+`</span>
+                                    <div class="case_item item_${itemsPlayer[itemSingle].rare}"
+                                        data-cat="${itemsPlayer[itemSingle].type_item}"
+                                        data-droped="${itemsPlayer[itemSingle].droped}" 
+                                        data-bonus="${itemsPlayer[itemSingle].bonus}"
+                                        data-bonus2="${itemsPlayer[itemSingle].bonus2}"
+                                        data-name="${itemsPlayer[itemSingle].name}"
+                                        data-label="${itemsPlayer[itemSingle].label}"
+                                        data-desc="${itemsPlayer[itemSingle].description}"
+                                        data-poids="${itemsPlayer[itemSingle].total}"
+                                        data-quantity="${itemsPlayer[itemSingle].amount}"
+                                        data-meta='${JSON.stringify(itemsPlayer[itemSingle].meta || {})}'
+                                        style="background-image: url('${itemsPlayer[itemSingle].img}');">
+                                        <span class="stock_item">${itemsPlayer[itemSingle].amount}</span>
                                     </div>
                                 </div>
                             `);
@@ -164,18 +169,19 @@ $(function () {
                             weightbase += parseFloat(itemsPlayer[itemSingle].total);
                             $("#content_user4").append(`
                                 <div class="col-lg-3 my-2">
-                                    <div class="case_item item_`+itemsPlayer[itemSingle].rare+`"
-                                        data-cat="`+itemsPlayer[itemSingle].type_item+`"
-                                        data-droped="`+itemsPlayer[itemSingle].droped+`" 
-                                        data-bonus="`+itemsPlayer[itemSingle].bonus+`" 
-                                        data-bonus2="`+itemsPlayer[itemSingle].bonus2+`"
-                                        data-quantity="`+itemsPlayer[itemSingle].amount+`" 
-                                        data-poids="`+itemsPlayer[itemSingle].total+`" 
-                                        data-name="`+itemsPlayer[itemSingle].name+`" 
-                                        data-label="`+itemsPlayer[itemSingle].label+`" 
-                                        data-desc="`+itemsPlayer[itemSingle].description+`" 
-                                        style="background-image: url('`+itemsPlayer[itemSingle].img+`');">
-                                        <span class="stock_item">`+itemsPlayer[itemSingle].amount+`</span>
+                                    <div class="case_item item_${itemsPlayer[itemSingle].rare}"
+                                        data-cat="${itemsPlayer[itemSingle].type_item}"
+                                        data-droped="${itemsPlayer[itemSingle].droped}" 
+                                        data-bonus="${itemsPlayer[itemSingle].bonus}"
+                                        data-bonus2="${itemsPlayer[itemSingle].bonus2}"
+                                        data-name="${itemsPlayer[itemSingle].name}"
+                                        data-label="${itemsPlayer[itemSingle].label}"
+                                        data-desc="${itemsPlayer[itemSingle].description}"
+                                        data-poids="${itemsPlayer[itemSingle].total}"
+                                        data-quantity="${itemsPlayer[itemSingle].amount}"
+                                        data-meta='${JSON.stringify(itemsPlayer[itemSingle].meta || {})}'
+                                        style="background-image: url('${itemsPlayer[itemSingle].img}');">
+                                        <span class="stock_item">${itemsPlayer[itemSingle].amount}</span>
                                     </div>
                                 </div>
                             `);
@@ -228,6 +234,15 @@ $(function () {
                             let desc       = $(this).data('desc');
                             let poids      = $(this).data('poids');
                             let cat        = $(this).data('cat');
+                            let metaRaw    = $(this).attr('data-meta');
+                            console.log("META RAW:", metaRaw);
+                            let meta       = {};
+                            try { meta = JSON.parse(metaRaw); } catch(e) {}
+                            if (meta && Object.keys(meta).length > 0) {
+                                for (const [key, value] of Object.entries(meta)) {
+                                    desc += `<br><b>${key} :</b> ${value}`;
+                                }
+                            }
 
                             $(".poids").html('');
                             $(".poids").html(parseFloat(poids).toFixed(2)+" KG");

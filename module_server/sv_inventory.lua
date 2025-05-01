@@ -241,11 +241,13 @@ end)
 -- ADD INVENTORY PLAYER FUNC
 ---
 RegisterNetEvent('infinity_needs:AddItemFunc')
-AddEventHandler('infinity_needs:AddItemFunc', function(source, ItemSended, Qt, Inventory, notif)
+AddEventHandler('infinity_needs:AddItemFunc', function(source, ItemSended, Qt, Inventory, notif, meta)
     local SourceSteamID         = exports.infinity_core:GetPlayerSource(source)
     if SourceSteamID then
         local SourceDatas       = exports.infinity_core:GetPlayerSession(source)
         local quantitySended    = tonumber(Qt)
+        -- meta peut être nil ou une table
+
         JSON_CHECKER(ItemSended) 
         if ItemHaveName ~= nil and quantitySended >= 1 and quantitySended <= Config.MaxSendItems then
             local player_inventory        = json.decode(SourceDatas._Inventory)
@@ -263,7 +265,7 @@ AddEventHandler('infinity_needs:AddItemFunc', function(source, ItemSended, Qt, I
                         table.insert(player_inventory ,{ 
                             name = ItemSended, 
                             amount = quantitySended, 
-                            meta = {}
+                            meta = getMetaOutput(meta)
                         })
                     end
                     local JsonItemsInventory        = json.encode(player_inventory)
@@ -432,10 +434,8 @@ AddEventHandler('infinity_needs:UseItem', function(source, itemUse, Inventory)
 
                     -- Use Standard item ammo and remove
                     if CategoryItem == "ammo_clip" and k['amount'] >= Config.AmmoClipMade then
-                        if itemUse == "single_ammo_pistol" then
-                            if itemUse then 
-                                TriggerEvent("infinity_needs:RemoveItemFunc", source, itemUse, 50, Inventory)
-                            end
+                        if itemUse then 
+                            TriggerEvent("infinity_needs:RemoveItemFunc", source, itemUse, 50, Inventory)
                         end
                     elseif CategoryItem == "ammo_clip" and k['amount'] < Config.AmmoClipMade then
                         exports.infinity_core:notification(source,'<b class="text-danger">ERROR</b>','You need X50 single ammo for made clip','center_left', 'infinitycore', 2500)
@@ -517,6 +517,22 @@ end)
 
 ----- [[ FUNCTIONS CORE  ]] -----
 
+function is_table_equal(t1, t2)
+    if t1 == t2 then return true end
+    if type(t1) ~= "table" or type(t2) ~= "table" then return false end
+    for k, v in pairs(t1) do
+        if type(v) == "table" and type(t2[k]) == "table" then
+            if not is_table_equal(v, t2[k]) then return false end
+        elseif v ~= t2[k] then
+            return false
+        end
+    end
+    for k, v in pairs(t2) do
+        if t1[k] == nil then return false end
+    end
+    return true
+end
+
 function ItemWeightCarry(player_inventory, quantitySended) 
     JsonItemsList()
     PlayerWeight = 0
@@ -594,11 +610,11 @@ function JsonItemsList()
 end
 
 -- exports.infinity_needs:AddInventoryItem(source, itemname, quantity)
-function AddInventoryItem(source, itemAdd, quantity, Inventory, notif)
+function AddInventoryItem(source, itemAdd, quantity, Inventory, notif, meta)
     local _source       = tonumber(source)
     Wait(155)
     local SourceDatas   = exports.infinity_core:GetPlayerSession(_source)
-    TriggerEvent('infinity_needs:AddItemFunc', source, itemAdd, quantity, SourceDatas._Inventory, notif)
+    TriggerEvent('infinity_needs:AddItemFunc', source, itemAdd, quantity, SourceDatas._Inventory, notif, meta)
 end
 
 -- exports.infinity_needs:RemoveInventoryItem(source, itemname, quantity)
